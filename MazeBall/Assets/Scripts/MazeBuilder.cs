@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.MazeCore;
 using System.Threading;
+using UnityEngine.SceneManagement;
 
 
 public class MazeBuilder : MonoBehaviour, IMazeBuilder
@@ -81,6 +82,10 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
                 wall.LocalObject?.SetActive(false);
             }
 
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainScene");
         }
     }
 
