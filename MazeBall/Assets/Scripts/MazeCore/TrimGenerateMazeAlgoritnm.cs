@@ -30,12 +30,9 @@ namespace Assets.Scripts.MazeCore
                 var randWall = RandPeekWall();
                 if (randWall.OtherMazeCell != null)
                 {
-                    if (randWall.MainMazeCell.HasVisited && randWall.OtherMazeCell.HasVisited)
-                    {
-                        // 移除墙
-                        mazeWallsList.Remove(randWall);
-                    }
-                    else if (randWall.MainMazeCell.HasVisited || randWall.OtherMazeCell.HasVisited)
+                    if ((randWall.MainMazeCell.HasVisited && !randWall.OtherMazeCell.HasVisited) ||
+                        (!randWall.MainMazeCell.HasVisited && randWall.OtherMazeCell.HasVisited)
+                        )
                     {
                         // 打破墙
                         randWall.BreakWall();
@@ -45,10 +42,10 @@ namespace Assets.Scripts.MazeCore
                         {
                             return kp.Value;
                         }));
-                        // 移除墙
-                        mazeWallsList.Remove(randWall);
                     }
                 }
+                // 移除墙
+                mazeWallsList.Remove(randWall);
             }
         }
 
@@ -57,7 +54,9 @@ namespace Assets.Scripts.MazeCore
             // 封闭所有墙
             totalMazeCellsVisitor.BuildAllWall();
             // 重置访问标识
-
+            totalMazeCellsVisitor.ResetAllVisitedFlags();
+            //清空列表
+            mazeWallsList.Clear();
             // TODO 支持随机选择通路起点
             // 选择起点作为通路起点，把它的相邻的墙加入列表
             mazeWallsList.AddRange(
