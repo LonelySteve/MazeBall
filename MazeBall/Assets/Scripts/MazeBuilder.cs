@@ -20,11 +20,15 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
     public float buildInterval = 0.1f;
     public Camera mainCamera;
     private Queue<MazeWall> buildWallsQueue;
+    private GameObject prefabGroundObj;
+    private GameObject prefabWallObj;
     private GameObject groundObj;
 
     // Start is called before the first frame update
     void Start()
     {
+        prefabGroundObj = Resources.Load("Prefabs/Ground") as GameObject;
+        prefabWallObj = Resources.Load("Prefabs/Wall") as GameObject;
         buildWallsQueue = new Queue<MazeWall>();
         var trim = new TrimGenerateMazeAlgoritnm(this);
         trim.GenerateMaze();
@@ -33,7 +37,7 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
     // Update is called once per frame
     void Update()
     {
-        if (BuildWallsQueue!=null && BuildWallsQueue.Count > 0)
+        if (BuildWallsQueue != null && BuildWallsQueue.Count > 0)
         {
             var wall = BuildWallsQueue.Dequeue();
             if (wall.HasWall)
@@ -66,7 +70,7 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
 
     public GameObject BuildGround()
     {
-        groundObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        groundObj = Instantiate(prefabGroundObj);
         groundObj.transform.localScale = new Vector3(MazeBuildSize.Width, 1, MazeBuildSize.Height);
         groundObj.transform.parent = transform;
         return groundObj;
@@ -74,7 +78,7 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
 
     public GameObject BuildOneWall(Vector3 wallPosition, Vector3 wallScale)
     {
-        GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject wall = Instantiate(prefabWallObj);
         wall.transform.position = wallPosition;
         wall.transform.localScale = wallScale;
         wall.transform.parent = groundObj.transform;

@@ -155,6 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae88f5cc2d2c0a4b8f276c92cd85519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mazeBuildWidth: 10
+  mazeBuildHeight: 10
+  mazeStartUnitPositionX: 0
+  mazeStartUnitPositionY: 0
+  mazeEndUnitPositionX: 9
+  mazeEndUnitPositionY: 9
+  mazeWallThick: 0.3
+  mazeWallHeight: 0.5
+  buildInterval: 0.1
   mainCamera: {fileID: 1833722726}
 --- !u!1 &1748939317
 GameObject:
