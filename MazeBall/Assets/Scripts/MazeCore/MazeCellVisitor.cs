@@ -51,10 +51,10 @@ namespace Assets.Scripts.MazeCore
         /// </summary>
         /// <param name="location">相对位置</param>
         /// <returns></returns>
-        protected MazeCell GetRelativeLocationMazeCell(Location location)
+        public MazeCell GetRelativeLocationMazeCell(Location location)
         {
             var pos = mazeArea.MazeRect.Size.GetPositionByRelativeLocation(location);
-            return MazeArea.MazeCells[pos.X, pos.Y];
+            return MazeArea.MazeCells[pos.Y, pos.X];
         }
 
         /// <summary>
