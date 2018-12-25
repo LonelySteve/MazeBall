@@ -64,11 +64,6 @@ QualitySettings:
     vSyncCount: 0
     lodBias: 0.4
     maximumLODLevel: 0
-<<<<<<< HEAD
-    particleRaycastBudget: 16
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 16
-=======
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -79,7 +74,6 @@ QualitySettings:
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
->>>>>>> feature-random_maze
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -105,11 +99,6 @@ QualitySettings:
     vSyncCount: 1
     lodBias: 0.7
     maximumLODLevel: 0
-<<<<<<< HEAD
-    particleRaycastBudget: 64
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 16
-=======
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -120,7 +109,6 @@ QualitySettings:
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
->>>>>>> feature-random_maze
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -138,11 +126,7 @@ QualitySettings:
     blendWeights: 2
     textureQuality: 0
     anisotropicTextures: 1
-<<<<<<< HEAD
-    antiAliasing: 2
-=======
     antiAliasing: 0
->>>>>>> feature-random_maze
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 1
@@ -150,11 +134,6 @@ QualitySettings:
     vSyncCount: 1
     lodBias: 1
     maximumLODLevel: 0
-<<<<<<< HEAD
-    particleRaycastBudget: 256
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 16
-=======
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -165,7 +144,6 @@ QualitySettings:
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
->>>>>>> feature-random_maze
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -175,24 +153,15 @@ QualitySettings:
     shadowResolution: 2
     shadowProjection: 1
     shadowCascades: 2
-<<<<<<< HEAD
-    shadowDistance: 40
-=======
     shadowDistance: 70
->>>>>>> feature-random_maze
     shadowNearPlaneOffset: 3
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
     blendWeights: 4
     textureQuality: 0
-<<<<<<< HEAD
-    anisotropicTextures: 1
-    antiAliasing: 4
-=======
     anisotropicTextures: 2
     antiAliasing: 2
->>>>>>> feature-random_maze
     softParticles: 1
     softVegetation: 1
     realtimeReflectionProbes: 1
@@ -200,11 +169,6 @@ QualitySettings:
     vSyncCount: 1
     lodBias: 1.5
     maximumLODLevel: 0
-<<<<<<< HEAD
-    particleRaycastBudget: 1024
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 16
-=======
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -215,7 +179,6 @@ QualitySettings:
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
->>>>>>> feature-random_maze
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
@@ -232,13 +195,8 @@ QualitySettings:
     shadowmaskMode: 1
     blendWeights: 4
     textureQuality: 0
-<<<<<<< HEAD
-    anisotropicTextures: 1
-    antiAliasing: 4
-=======
     anisotropicTextures: 2
     antiAliasing: 2
->>>>>>> feature-random_maze
     softParticles: 1
     softVegetation: 1
     realtimeReflectionProbes: 1
@@ -246,11 +204,6 @@ QualitySettings:
     vSyncCount: 1
     lodBias: 2
     maximumLODLevel: 0
-<<<<<<< HEAD
-    particleRaycastBudget: 4096
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 16
-=======
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -261,27 +214,15 @@ QualitySettings:
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
->>>>>>> feature-random_maze
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 2
-<<<<<<< HEAD
-    Nintendo 3DS: 5
-    Nintendo Switch: 5
-    PS4: 5
-    PSP2: 2
-    Standalone: 5
-    Tizen: 2
-    WebGL: 3
-    WiiU: 5
-=======
     Lumin: 5
     Nintendo Switch: 5
     PS4: 5
     Standalone: 5
     WebGL: 3
->>>>>>> feature-random_maze
     Windows Store Apps: 5
     XboxOne: 5
     iPhone: 2
