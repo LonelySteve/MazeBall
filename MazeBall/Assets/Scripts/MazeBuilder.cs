@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.MazeCore;
 using System.Threading;
+using UnityEngine.SceneManagement;
 
 
 public class MazeBuilder : MonoBehaviour, IMazeBuilder
@@ -22,22 +23,41 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
     private Queue<MazeWall> buildWallsQueue;
     private GameObject prefabGroundObj;
     private GameObject prefabWallObj;
+    private GameObject prefabBallObj;
+    private GameObject prefabGoal;
     private GameObject groundObj;
+    private GameObject playObj;
+    private Rigidbody playerRigidbody;
+
 
     // Start is called before the first frame update
     void Start()
     {
         prefabGroundObj = Resources.Load("Prefabs/Ground") as GameObject;
         prefabWallObj = Resources.Load("Prefabs/Wall") as GameObject;
-     
+        prefabBallObj = Resources.Load("Prefabs/Ball") as GameObject;
+        prefabGoal = Resources.Load("Prefabs/Goal") as GameObject;
+
         buildWallsQueue = new Queue<MazeWall>();
+
         var trim = new TrimGenerateMazeAlgoritnm(this);
 
         // 调整摄影机机位
         mainCamera.transform.Rotate(new Vector3(90, 0, 0));
-        mainCamera.transform.localPosition = new Vector3(groundObj.transform.localPosition.x, Mathf.Max(mazeBuildHeight,mazeBuildWidth) , groundObj.transform.localPosition.z);
+        mainCamera.transform.localPosition = new Vector3(groundObj.transform.localPosition.x, Mathf.Max(mazeBuildHeight, mazeBuildWidth), groundObj.transform.localPosition.z);
 
         trim.GenerateMaze();
+
+        // 生成球体
+        var ball_pos = trim.TranslateMazeCellPosition(trim.TotalMazeCellsVisitor.StartMazeCell.Position);
+        // 让球更高一点
+        ball_pos += new Vector3(0, 5, 0);
+        playObj = BuildBall(ball_pos, new Vector3(0.5f, 0.5f, 0.5f));
+        playerRigidbody = playObj.GetComponent<Rigidbody>();
+        // 生成目标点
+        var goal_pos = trim.TranslateMazeCellPosition(trim.TotalMazeCellsVisitor.EndMazeCell.Position);
+        // 让目标点高一点
+        BuildGoal(goal_pos, new Vector3(0.5f, 0.5f, 0.5f));
     }
 
     // Update is called once per frame
@@ -63,7 +83,37 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
             }
 
         }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainScene");
+        }
     }
+
+
+    void FixedUpdate()
+    {
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
+        playerRigidbody.AddForce(new Vector3(h, 0, v) * 5);
+    }
+
+    public GameObject BuildBall(Vector3 wallPosition, Vector3 wallScale)
+    {
+        GameObject player = Instantiate(prefabBallObj);
+        player.tag = player.name = "Player";
+        player.transform.position = wallPosition;
+        player.transform.localScale = wallScale;
+        return player;
+    }
+
+    public GameObject BuildGoal(Vector3 goalPosition, Vector3 goalScale)
+    {
+        GameObject goal = Instantiate(prefabGoal);
+        goal.transform.position = goalPosition;
+        goal.transform.localScale = goalScale;
+        return goal;
+    }
+
     #endregion
     #region IMazeBuilder
     public MazeSize MazeBuildSize => new MazeSize(mazeBuildWidth, mazeBuildHeight);
@@ -90,7 +140,6 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
         wall.transform.parent = groundObj.transform;
         return wall;
     }
-
     #endregion
 }
 

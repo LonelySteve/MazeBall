@@ -21,10 +21,12 @@ namespace Assets.Scripts.MazeCore
                 builder = value ?? throw new System.ArgumentNullException();
             }
         }
-        protected MazeCellsVisitor totalMazeCellsVisitor;
+
         protected GameObject groundGameObj;
         protected IMazeBuilder builder;
         private MazeArea totalMazeArea;
+
+        public MazeCellsVisitor TotalMazeCellsVisitor { get; protected set; }
 
         public GenerateMazeAlgoritnm(IMazeBuilder builder)
         {
@@ -107,7 +109,7 @@ namespace Assets.Scripts.MazeCore
                 }
             }
 
-            totalMazeCellsVisitor = new MazeCellsVisitor(totalMazeArea);
+            TotalMazeCellsVisitor = new MazeCellsVisitor(totalMazeArea);
             // 初始化迷宫
             InitMaze();
         }
@@ -134,7 +136,7 @@ namespace Assets.Scripts.MazeCore
         /// <param name="mazePosition">迷宫位置</param>
         /// <param name="direction">指定方向</param>
         /// <returns></returns>
-        protected (Vector3, Vector3) TranslateMazeWallPosition(MazePosition mazePosition, Direction direction)
+        public (Vector3, Vector3) TranslateMazeWallPosition(MazePosition mazePosition, Direction direction)
         {
             var groundPosition = groundGameObj.transform.localPosition;
             var groundScale = groundGameObj.transform.localScale;
@@ -168,6 +170,32 @@ namespace Assets.Scripts.MazeCore
                     return (new Vector3(center_middle_local_x, local_y, left_uppper_local_z), new Vector3(unit_x, Builder.MazeWallHeight, Builder.MazeWallThick));
             }
             return (new Vector3(), new Vector3());
+        }
+        /// <summary>
+        /// 将迷宫位置翻译成迷宫单元的游戏内本地坐标
+        /// </summary>
+        /// <param name="mazePosition">迷宫位置</param>
+        /// <returns></returns>
+        public Vector3 TranslateMazeCellPosition(MazePosition mazePosition)
+        {
+            var groundPosition = groundGameObj.transform.localPosition;
+            var groundScale = groundGameObj.transform.localScale;
+
+            float unit_x = groundScale.x / totalMazeArea.MazeRect.Size.Width;
+            float unit_z = groundScale.z / totalMazeArea.MazeRect.Size.Height;
+
+            float half_width = totalMazeArea.MazeRect.Size.Width / 2.0f;
+            float half_height = totalMazeArea.MazeRect.Size.Height / 2.0f;
+
+            float left_uppper_local_x = unit_x * (mazePosition.X - half_width);
+            float left_uppper_local_z = unit_z * (half_height - mazePosition.Y);
+
+            float center_middle_local_x = left_uppper_local_x + unit_x / 2;
+            float center_middle_local_z = left_uppper_local_z - unit_z / 2;
+
+            float local_y = groundScale.y / 2 + Builder.MazeWallHeight / 2;
+
+            return new Vector3(center_middle_local_x, local_y, center_middle_local_z);
         }
     }
 }

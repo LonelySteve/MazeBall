@@ -52,22 +52,22 @@ namespace Assets.Scripts.MazeCore
         protected override void InitMaze()
         {
             // 封闭所有墙
-            totalMazeCellsVisitor.BuildAllWall();
+            TotalMazeCellsVisitor.BuildAllWall();
             // 重置访问标识
-            totalMazeCellsVisitor.ResetAllVisitedFlags();
+            TotalMazeCellsVisitor.ResetAllVisitedFlags();
             //清空列表
             mazeWallsList.Clear();
             // TODO 支持随机选择通路起点
             // 选择起点作为通路起点，把它的相邻的墙加入列表
             mazeWallsList.AddRange(
-                totalMazeCellsVisitor.StartMazeCell.SurroundedMazeWalls.Select(
+                TotalMazeCellsVisitor.StartMazeCell.SurroundedMazeWalls.Select(
                     new System.Func<KeyValuePair<Direction, MazeWall>, MazeWall>(
                         (KeyValuePair<Direction, MazeWall> kp) =>
             {
                 return kp.Value;
             })));
             // 标记已访问
-            totalMazeCellsVisitor.StartMazeCell.HasVisited = true;
+            TotalMazeCellsVisitor.StartMazeCell.HasVisited = true;
         }
 
         /// <summary>
