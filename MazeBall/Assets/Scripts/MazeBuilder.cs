@@ -23,8 +23,10 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
     private GameObject prefabGroundObj;
     private GameObject prefabWallObj;
     private GameObject prefabBallObj;
+    private GameObject prefabGoal;
     private GameObject groundObj;
     private GameObject playObj;
+    private Rigidbody playerRigidbody;
 
 
     // Start is called before the first frame update
@@ -33,6 +35,7 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
         prefabGroundObj = Resources.Load("Prefabs/Ground") as GameObject;
         prefabWallObj = Resources.Load("Prefabs/Wall") as GameObject;
         prefabBallObj = Resources.Load("Prefabs/Ball") as GameObject;
+        prefabGoal = Resources.Load("Prefabs/Goal") as GameObject;
 
         buildWallsQueue = new Queue<MazeWall>();
 
@@ -45,10 +48,15 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
         trim.GenerateMaze();
 
         // 生成球体
-        var ball_pos = trim.TranslateMazeCellPosition(trim.TotalMazeCellsVisitor.MazeArea.MazeRect.Position);
+        var ball_pos = trim.TranslateMazeCellPosition(trim.TotalMazeCellsVisitor.StartMazeCell.Position);
         // 让球更高一点
         ball_pos += new Vector3(0, 5, 0);
         playObj = BuildBall(ball_pos, new Vector3(0.5f, 0.5f, 0.5f));
+        playerRigidbody = playObj.GetComponent<Rigidbody>();
+        // 生成目标点
+        var goal_pos = trim.TranslateMazeCellPosition(trim.TotalMazeCellsVisitor.EndMazeCell.Position);
+        // 让目标点高一点
+        BuildGoal(goal_pos, new Vector3(0.5f, 0.5f, 0.5f));
     }
 
     // Update is called once per frame
@@ -76,6 +84,14 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
         }
     }
 
+
+    void FixedUpdate()
+    {
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
+        playerRigidbody.AddForce(new Vector3(h, 0, v) * 5);
+    }
+
     public GameObject BuildBall(Vector3 wallPosition, Vector3 wallScale)
     {
         GameObject player = Instantiate(prefabBallObj);
@@ -83,6 +99,14 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
         player.transform.position = wallPosition;
         player.transform.localScale = wallScale;
         return player;
+    }
+
+    public GameObject BuildGoal(Vector3 goalPosition, Vector3 goalScale)
+    {
+        GameObject goal = Instantiate(prefabGoal);
+        goal.transform.position = goalPosition;
+        goal.transform.localScale = goalScale;
+        return goal;
     }
 
     #endregion
