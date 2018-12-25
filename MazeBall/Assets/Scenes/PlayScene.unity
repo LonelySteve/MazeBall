@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae88f5cc2d2c0a4b8f276c92cd85519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeBuildWidth: 25
-  mazeBuildHeight: 25
+  mazeBuildWidth: 15
+  mazeBuildHeight: 15
   mazeStartUnitPositionX: 0
   mazeStartUnitPositionY: 0
   mazeEndUnitPositionX: 9
