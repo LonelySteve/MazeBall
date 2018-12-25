@@ -33,8 +33,7 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
     // Update is called once per frame
     void Update()
     {
-
-        if (BuildWallsQueue.Count > 0)
+        if (BuildWallsQueue!=null && BuildWallsQueue.Count > 0)
         {
             var wall = BuildWallsQueue.Dequeue();
             if (wall.HasWall)
@@ -54,7 +53,6 @@ public class MazeBuilder : MonoBehaviour, IMazeBuilder
             }
 
         }
-
     }
     #endregion
     #region IMazeBuilder
