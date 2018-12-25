@@ -26,8 +26,6 @@ namespace Assets.Scripts.MazeCore
         protected IMazeBuilder builder;
         private MazeArea totalMazeArea;
 
-        public int RandSeed { set { Random.seed = value; } get { return Random.seed; } }
-
         public GenerateMazeAlgoritnm(IMazeBuilder builder)
         {
             Builder = builder;
